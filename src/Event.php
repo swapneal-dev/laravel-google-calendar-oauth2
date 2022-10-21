@@ -12,6 +12,7 @@ use Google_Service_Calendar_EventSource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
 
 class Event
 {
@@ -235,9 +236,22 @@ class Event
         return $this->calendarId;
     }
 
+    public function setCalendarId($calendarId): string
+    {
+        $this->calendarId = $calendarId;
+    }
+
     protected static function getGoogleCalendar(string $calendarId = null): GoogleCalendar
     {
-        $calendarId = $calendarId ?? config('google-calendar.calendar_id');
+        if (!auth()->check()) {
+            throw InvalidConfiguration::authenticationRequired();
+        }
+
+        if (empty(auth()->user()->google_calender_id)) {
+            throw InvalidConfiguration::calendarIdNotSpecified();
+        }
+
+        $calendarId = $calendarId ?? auth()->user()->google_calender_id;
 
         return GoogleCalendarFactory::createForCalendarId($calendarId);
     }

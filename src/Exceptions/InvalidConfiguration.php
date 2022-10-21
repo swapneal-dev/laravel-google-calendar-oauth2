@@ -6,6 +6,11 @@ use Exception;
 
 class InvalidConfiguration extends Exception
 {
+    public static function authenticationRequired()
+    {
+        return new static('There is no user logged in to fetch events so far.');
+    }
+
     public static function calendarIdNotSpecified()
     {
         return new static('There was no calendar id specified. You must provide a valid calendar id to fetch events for.');
