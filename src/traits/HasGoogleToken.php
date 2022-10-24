@@ -2,7 +2,7 @@
 
 namespace Spatie\GoogleCalendar\traits;
 
-trait Calender
+trait HasGoogleToken
 {
     protected function getArrayableItems(array $values)
     {
