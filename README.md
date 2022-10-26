@@ -5,9 +5,11 @@ This package is forked from [spatie's calendar package](https://github.com/spati
 
 # Installation
 
-You can install the package via composer:
+Install using composer<br>
+```bash
+composer require swapneal-dev/laravel-google-calendar-oauth2
+```
 
-composer require spatie/laravel-google-calendar
 You must publish the configuration with this command:
 
 ```
