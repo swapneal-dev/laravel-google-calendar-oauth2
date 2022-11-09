@@ -22,4 +22,7 @@ php artisan vendor:publish --provider="Spatie\GoogleCalendar\GoogleCalendarServi
 4. add calendar id to `google_calender_id` column in users table.
 5. add trait to user model `Spatie\GoogleCalendar\traits\HasGoogleToken`
 
+# I have created an example project for google calender implementation of this package.
+https://github.com/swapneal-dev/google-calender-and-contacts
+
 Now you are good to go.
