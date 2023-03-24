@@ -13,6 +13,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\GoogleCalendar\Exceptions\InvalidConfiguration;
+use Google_Service_Calendar_EventExtendedProperties;
 
 class Event
 {
@@ -298,5 +299,17 @@ class Event
             'startDateTime' => 'start.dateTime',
             'endDateTime' => 'end.dateTime',
         ][$name] ?? $name;
+    }
+
+    public function ExtendedProperties(array $properties, bool $isShared)
+    {
+        $extendedProperties = new Google_Service_Calendar_EventExtendedProperties();
+        $extendedProperties->setShared($isShared);
+        if (!$isShared) {
+            $extendedProperties->setPrivate($properties);
+        } else {
+            $extendedProperties->setShared($properties);
+        }
+        $this->googleEvent->setExtendedProperties($extendedProperties);
     }
 }
